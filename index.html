@@ -26,7 +26,7 @@ h1{font-size:21px;margin:4px 0 2px}.tag{color:var(--g);font-size:13px;margin:0 0
 .disc{font-size:11px;color:var(--g);margin-top:20px;line-height:1.5}.ft{text-align:center;font-size:12px;color:var(--g);margin-top:14px}
 .empty{text-align:center;color:var(--g);padding:40px 0}.cnt{font-size:12px;color:var(--g);margin:0 0 8px}
 </style></head><body><div class="wrap">
-<div class="top"><div><h1>탬디그 오늘의 특가</h1><p class="tag">토스쇼핑에서 오늘 할인율 높은 것만 골라 매일 갱신</p></div><span class="date">10.14 15:34 갱신</span></div>
+<div class="top"><div><h1>탬디그 오늘의 특가</h1><p class="tag">토스쇼핑에서 오늘 할인율 높은 것만 골라 매일 갱신</p></div><span class="date">10.14 15:35 갱신</span></div>
 <div class="nav"><a href="me.html">🎬 영상에 나온 상품</a></div>
 <input class="search" id="q" placeholder="상품명 검색 (예: 오메가3, 칼세트)" autocomplete="off">
 <div class="bar"><button class="on" data-f="deal">⚡ 오늘의 특가 85</button><button data-f="all">전체 120</button><button data-f="disc">할인율순</button><button data-f="price">낮은 가격순</button><button data-f="reviews">리뷰 많은순</button></div>
@@ -45,7 +45,7 @@ function render(){
   if(F==='price') arr.sort((a,b)=>a.price-b.price); else if(F==='reviews') arr.sort((a,b)=>(b.reviews||0)-(a.reviews||0)); else arr.sort((a,b)=>(b.deal-a.deal)||((b.disc||0)-(a.disc||0)));
   if(F==='deal'&&!arr.length&&!Q){F='all';document.querySelectorAll('.bar button').forEach(x=>x.classList.toggle('on',x.dataset.f==='all'));return render();}
   document.getElementById('cnt').textContent=arr.length+'개';
-  document.getElementById('list').innerHTML=arr.length?arr.map(p=>`<a class="card" href="${p.url}" target="_blank" rel="nofollow sponsored">${p.deal?`<span class="badge deal">⚡ 특가${p.end?' ~'+p.end:''}</span>`:(p.disc>=70?`<span class="badge">${p.disc}%↓</span>`:'')}<img src="${p.img}" loading="lazy" alt=""><div><p class="nm">${p.name}</p><div class="pr"><b>${won(p.price)}</b>${p.disc?`<span class="d">${p.disc}%</span>`:''}${p.orig?`<s>${won(p.orig)}</s>`:''}</div><div class="rv">${p.rating?`★ ${p.rating}`:''}${p.reviews?` (${Number(p.reviews).toLocaleString()})`:''}${p.rank?` · 베스트 ${p.rank}위`:''}</div><span class="go">구매하러 가기 →</span></div></a>`).join(''):'<div class="empty">조건에 맞는 상품이 없어요</div>';
+  document.getElementById('list').innerHTML=arr.length?arr.map(p=>`<a class="card" href="${p.url}" target="_blank" rel="nofollow sponsored">${p.deal?`<span class="badge deal">⚡ 특가${p.end?' ~'+p.end:''}</span>`:(p.disc>=70?`<span class="badge">${p.disc}%↓</span>`:'')}<img src="${p.img}" loading="lazy" referrerpolicy="no-referrer" alt="" onerror="this.style.visibility='hidden'"><div><p class="nm">${p.name}</p><div class="pr"><b>${won(p.price)}</b>${p.disc?`<span class="d">${p.disc}%</span>`:''}${p.orig?`<s>${won(p.orig)}</s>`:''}</div><div class="rv">${p.rating?`★ ${p.rating}`:''}${p.reviews?` (${Number(p.reviews).toLocaleString()})`:''}${p.rank?` · 베스트 ${p.rank}위`:''}</div><span class="go">구매하러 가기 →</span></div></a>`).join(''):'<div class="empty">조건에 맞는 상품이 없어요</div>';
 }
 document.querySelectorAll('.bar button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.bar button').forEach(x=>x.classList.remove('on'));b.classList.add('on');F=b.dataset.f;render()});
 document.getElementById('q').oninput=e=>{Q=e.target.value.trim().toLowerCase();render()};
