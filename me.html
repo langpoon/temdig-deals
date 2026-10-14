@@ -26,7 +26,7 @@ function render(q){
   q=(q||'').trim().toLowerCase();
   const arr=D.filter(x=>!q||String(x.no)===q||x.nm.toLowerCase().includes(q));
   document.getElementById('nos').innerHTML=q?'':D.slice(0,24).map(x=>`<a href="s/${x.no}.html">${x.no}</a>`).join('');
-  document.getElementById('list').innerHTML=arr.length?arr.map(x=>`<a href="s/${x.no}.html"><img src="${x.img}" loading="lazy" alt=""><div><div class="t">[${x.no}번] ${x.nm}</div><div class="m">${won(x.price)}</div><span class="go">상품 보기 →</span></div></a>`).join(''):'<p class="sub">찾는 상품이 없어요</p>';
+  document.getElementById('list').innerHTML=arr.length?arr.map(x=>`<a href="s/${x.no}.html"><img src="${x.img}" loading="lazy" referrerpolicy="no-referrer" alt="" onerror="this.style.visibility='hidden'"><div><div class="t">[${x.no}번] ${x.nm}</div><div class="m">${won(x.price)}</div><span class="go">상품 보기 →</span></div></a>`).join(''):'<p class="sub">찾는 상품이 없어요</p>';
 }
 document.getElementById('q').oninput=e=>render(e.target.value);
 const h=location.hash.replace('#','');if(h){document.getElementById('q').value=h;}render(h);
